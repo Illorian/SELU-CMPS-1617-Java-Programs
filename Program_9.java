@@ -114,7 +114,23 @@ public class Program_9 {
         FLOOR("floor", 4, 1, true, (num1, num2) -> Math.floor(num1)),
         CEILING("ceil", 4, 1, true, (num1, num2) -> Math.ceil(num1)),
         ROUND("round", 4, 1, true, (num1, num2) -> Math.round(num1)),
-        LOG_CUSTOM_BASE("logb", 4, 2, true, (num1, num2) -> Math.log(num1) / Math.log(num2));
+        LOG_CUSTOM_BASE("logb", 4, 2, true, (num1, num2) -> {
+            
+            if (num1 <= 0){
+                throw new ArithmeticException("Incorrect domain for logarithms (must be positive number)");
+            }
+
+            if (num2 <= 0 || num2 == 1){
+                throw new ArithmeticException("Cannot have non-positive logarithm base or base of 1");
+            }
+
+            if (Math.log(num2) == 0){
+                throw new ArithmeticException("Cannot divide by zero");
+            }
+
+            return Math.log(num1) / Math.log(num2);
+
+        });
 
 
     //Enum Variables
